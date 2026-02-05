@@ -110,14 +110,14 @@ function App() {
 
   return (
       <>
-          <body className="app-body">
+          <div className="app-body">
               <div>
                   <img src={towerHeader} className="header-image" alt="Tower Header" />
               </div>
               <div className="TowerTitle">
                   Adventures in Dreamland!
               </div>
-              <div className="TowerBody">
+              <div className="TowerMain">
                   <i>The night grows old and you are weary. Your waking hours have been spent in the service of the Tower, aiding your coven. Bleary-eyed, you climb the Tower stairs, feet dragging. All you can think about is sleep. Once you reach your chambers, you kick off your shoes and collapse into bed. But as you drift off to sleep, the Tower beckons; it is not done with you yet. You find yourself in a dream where things are not as they seem in the waking world&mdash;and you have been given a task.
                       <br />
                       <br />You get your bearings, and in your head, the Tower whispers your mission. </i>
@@ -137,7 +137,7 @@ function App() {
                       
                   </p>
               </div>
-          </body>
+          </div>
 
     </>
   )

@@ -1,8 +1,9 @@
-#root {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
+.app-body {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+
 }
 
 @keyframes logo-spin {
@@ -41,6 +42,11 @@
     font-weight: normal;
     font-style: normal;
 }
+img.header-image {
+    width: 80%;
+    height: auto;
+
+}
 
 .TowerTitle {
     font-family: 'Ancient Medium', serif;
@@ -49,18 +55,13 @@
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
-.TowerBody {
+.TowerMain {
     font-family: 'Relationship of mélodrame', serif;
     font-size: 15pt;
-    color: #FFFFFF;
+    color: #dfdfdf;
 }
 .card {
     font-family: 'Relationship of mélodrame', serif;
     font-size: 18pt;
-    color: #FFFFFF;
-}
-
-img.header-image {
-    width: 80%;
-    height: auto;
+    color: #dfdfdf;
 }
