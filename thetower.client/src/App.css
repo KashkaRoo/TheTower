@@ -1,21 +1,8 @@
 #root {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
@@ -34,9 +21,46 @@
 }
 
 .card {
-  padding: 2em;
+  padding: 1em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+@font-face {
+    font-family: 'Ancient Medium';
+    src: url('./assets/fonts/Ancient Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+   
+}
+@font-face {
+    font-family: 'Relationship of mélodrame';
+    src: url('./assets/fonts/Relationship of mélodrame.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.TowerTitle {
+    font-family: 'Ancient Medium', serif;
+    font-size: 52pt;
+    color: #491e1c;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}
+
+.TowerBody {
+    font-family: 'Relationship of mélodrame', serif;
+    font-size: 15pt;
+    color: #FFFFFF;
+}
+.card {
+    font-family: 'Relationship of mélodrame', serif;
+    font-size: 18pt;
+    color: #FFFFFF;
+}
+
+img.header-image {
+    width: 80%;
+    height: auto;
 }

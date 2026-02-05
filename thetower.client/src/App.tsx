@@ -15,7 +15,7 @@ function App() {
 
     const CharacterMap = new Map([
         [1, 'a clumsy wizard'],
-        [2, 'a fairy with two different shaped wings'],
+        [2, 'a fairy with two different-shaped wings'],
         [3, "a ghost who can't go through walls"],
         [4, 'a ghost with unfinished business in the Tower'],
         [5, 'a lawyer who plays the harmonica'],
@@ -39,9 +39,9 @@ function App() {
         [23, 'a prophet who lost their keys'],
         [24, 'a witch expecting a package soon'],
         [25, 'a dragon afraid of heights'],
-        [26, 'a ghost learning Spanish over the shoulder of the person their haunting'],
+        [26, "a ghost learning Spanish over the shoulder of the person they're haunting"],
         [27, 'a bard taking night classes to learn algebra'],
-        [28, 'a necromancer trying to come up with the perfect response to a past arguement '],
+        [28, 'a necromancer trying to come up with the perfect response to a past arguement'],
         [29, 'a snail granted legs by their fairy godmother'],
         [30, 'a knight with two left feet'],
         [31, 'a vampire who wears a jangly jester hat'],
@@ -68,29 +68,29 @@ function App() {
     ]);
 
     const ObjectMap = new Map([
-        [1, "The Hanged Man’s favorite piece of chalk."],
-        [2, "The Queen of Sword’s favorite katana."],
-        [3, "Temperance's favorite set of cups."],
-        [4, "The High Priestess' tome."],
-        [5, "The Lover’s Jar of Hearts."],
-        [6, "The Hierophant’s favorite dagger."],
-        [7, "Justice’s scales."],
-        [8, "the key to that new weird door in the basement."],
-        [9, "the front left door knocker."],
-        [10, "the gardener’s poison-resistant gloves."],
-        [11, "the librarian’s glasses' chain."],
-        [12, "the maid’s magic feather duster."],
-        [13, "an ancient rusty sword from the armory ."],
-        [14, "the dungeon cleaner’s mop."],
-        [15, "a strength potion from the coven storage."],
-        [16, "a sack of gold from the coven vault."],
-        [17, "the deed to the Tower."],
-        [18, "de-icing salt for the stairs leading up to the Tower."],
-        [19, "the dungeon master’s ring of teething keys for his young child."],
-        [20, "the old crone’s dentures."],
-        [21, "the guard’s back brace."],
-        [22, "a suspicious piece of silver."],
-        [23, "a lucky piece of a zinc-copper disc with a face on it."],
+        [1, "The Hanged Man's favorite piece of chalk"],
+        [2, "The Queen of Swords' favorite katana"],
+        [3, "Temperance's favorite set of cups"],
+        [4, "The High Priestess' tome"],
+        [5, "The Lover's Jar of Hearts"],
+        [6, "The Hierophant's favorite dagger"],
+        [7, "Justice's scales"],
+        [8, "the key to that new weird door in the basement"],
+        [9, "the front left door knocker"],
+        [10, "the gardener's poison-resistant gloves"],
+        [11, "the librarian's glasses' chain"],
+        [12, "the maid's magic feather duster"],
+        [13, "an ancient rusty sword from the armoury"],
+        [14, "the dungeon cleaner's mop"],
+        [15, "a strength potion from the coven storage"],
+        [16, "a sack of gold from the coven vault"],
+        [17, "the deed to the Tower"],
+        [18, "de-icing salt for the stairs leading up to the Tower"],
+        [19, "the dungeon masters' ring of teething keys for his young child"],
+        [20, "the old crone's dentures"],
+        [21, "the guard's back brace"],
+        [22, "a suspicious piece of silver"],
+        [23, "a lucky piece of a zinc-copper disc with a face on it"],
     ]);
 
     const getTask = () => {
@@ -114,17 +114,27 @@ function App() {
               <div>
                   <img src={towerHeader} className="header-image" alt="Tower Header" />
               </div>
-              <div>
-                  <h1>The Tower's Adventures in Dreamland</h1>
-                  <i>The night grows old, and you are weary. Your waking hours have been spent in the service of the Tower, aiding your coven. Bleary-eyed, you climb the Tower stairs, feet dragging. All you can think about is sleep. Once you reach your chambers, you kick off your shoes and collapse into bed. But as you drift off to sleep, the Tower beckons; it is not done with you yet. You find yourself in a dream where things are not as they seem in the waking world—and you have been given a task. You get your bearings, and in your head, the Tower whispers your mission. </i>
+              <div className="TowerTitle">
+                  Adventures in Dreamland!
+              </div>
+              <div className="TowerBody">
+                  <i>The night grows old and you are weary. Your waking hours have been spent in the service of the Tower, aiding your coven. Bleary-eyed, you climb the Tower stairs, feet dragging. All you can think about is sleep. Once you reach your chambers, you kick off your shoes and collapse into bed. But as you drift off to sleep, the Tower beckons; it is not done with you yet. You find yourself in a dream where things are not as they seem in the waking world&mdash;and you have been given a task.
+                      <br />
+                      <br />You get your bearings, and in your head, the Tower whispers your mission. </i>
               </div>
               <div className="card">
                   <button  onClick={() => getTask()}>
-                      Heed the Tower's call
+                      Heed the Tower's call!
                   </button>
                   <p>
-                      <h4>{assigned &&
-                          `Behold! You are ${character} from ${location}. The Tower has tasked you to find ${object}`}</h4>
+                      {assigned && (
+                          <>
+                          Behold! You are <b>{character}</b> who hails from <b>{location}</b>. The Tower has tasked you to find <b>{object}</b>.
+                          </>
+                      )
+                      }
+
+                      
                   </p>
               </div>
           </body>
