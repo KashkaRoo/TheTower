@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="thetower.client/thetower.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="TheTower.Server/TheTower.Server.csproj" />
+</Solution>

@@ -1,0 +1,6 @@
+@TheTower.Server_HostAddress = http://localhost:5030
+
+GET {{TheTower.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
