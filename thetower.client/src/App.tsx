@@ -101,7 +101,7 @@ function App() {
         [31, "a candle that is always lit at night"],
         [32, "the guard's whetstone"],
         [33, "chew toys for the monsters on Mt Tilia"],
-        [34, "a map to find the Tower–that always leads you off course"],
+        [34, "a map to find the Tower&mdash;which always leads you off course"],
         [35, "a deck of tarot cards that reshuffle themselves"],
         [36, "the blacksmith's fire poker"],
         [37, "a candle that has burned crooked"],
@@ -113,6 +113,7 @@ function App() {
         [43, "Vincent's fish food"],
         [44, "Vincent's indigestion medicine"],
         [45, "a mysteriously missing rotted corpse"],
+        [46, "a screw from under Grim's workbench"],
     ]);
 
     const getTask = () => {
