@@ -177,25 +177,24 @@ function App() {
             setGenerations(prev => [...prev, newGen]);
             setAttemptsLeft(prev => prev - 1);
 
+            // Build the exact sentence shown in the UI and store that in the activity log.
+            const callLabels = ['Call One', 'Call Two', 'Call Three'];
+            // use current generations.length (previous length) to pick label index
+            const label = callLabels[generations.length] ?? `Call ${generations.length + 1}`;
+            const sentence = `${label} generated: Behold! You are ${characterRandom} who hails from ${locationRandom}. The Tower has tasked you to find ${objectRandom}.`;
+
             // log the generation attempt with UK time and entered id
             const genTimestamp = nowUk();
             const genLog = {
                 id: enteredId.trim(),
                 event: 'generation' as const,
                 timestamp: genTimestamp,
-                details: `Call ${generations.length + 1} generated: ${characterRandom} / ${locationRandom} / ${objectRandom}`,
+                details: sentence,
             };
             setLogs(prev => [...prev, genLog]);
             console.log('Generation log:', genLog);
         }
     }
-
-    function handleLogout() {
-        setIsAuthenticated(false);
-        setEnteredId('');
-        // preserve logs but you can clear if you prefer
-    }
-
   return (
       <>
           <div className="app-body">
@@ -247,7 +246,7 @@ function App() {
                       <div className="card">
                           <div style={{ display: 'flex', gap: 8, justifyContent: 'center', alignItems: 'center' }}>
                               <button onClick={() => getTask()} disabled={attemptsLeft === 0}>
-                                  Heed the Tower's Calls!
+                                  Heed the Tower's Call!
                               </button>
                           </div>
 
