@@ -1,16 +1,47 @@
 import { useState } from 'react'
-import towerHeader from '/TowerHeader.jpg'
+import towerHeader from '/TowerHeaderSmaller.png'
 import './App.css'
 
 
 function App() {
-    //const [count, setCount] = useState(0)
-    const [character, setCharacter] = useState<string | undefined>(undefined);
-    const [object, setObject] = useState<string | undefined>(undefined);
-    const [location, setLocation] = useState<string | undefined>(undefined);
-    const [assigned, setAssigned] = useState(Boolean(false));
-    function getRandomIndexFromMap<K, V>(map: Map<K, V>): number {
-        return Math.floor(Math.random() * map.size) + 1;
+    // gating
+    const [enteredId, setEnteredId] = useState<string>('');
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+    // simple visible log of entries + generation attempts
+    const [logs, setLogs] = useState<
+        { id: string; event: 'entry' | 'generation'; timestamp: string; details?: string }[]
+    >([]);
+
+    // allow 3 total generations (initial + 2 rerolls)
+    const INITIAL_ATTEMPTS = 3;
+    const [attemptsLeft, setAttemptsLeft] = useState<number>(INITIAL_ATTEMPTS);
+
+    // keep a history of generated tasks so each remains on screen
+    const [generations, setGenerations] = useState<
+        { character: string; location: string; taskObject: string }[]
+    >([]);
+
+    // secure random integer in [0, max)
+    function secureRandomInt(max: number): number {
+        if (typeof crypto !== 'undefined' && 'getRandomValues' in crypto) {
+            const array = new Uint32Array(1);
+            crypto.getRandomValues(array);
+            return array[0] % max;
+        }
+        // fallback
+        return Math.floor(Math.random() * max);
+    }
+
+    // pick a random key from a Map (avoids relying on numeric sequential keys)
+    function getRandomKeyFromMap<K, V>(map: Map<K, V>): K {
+        const keys = Array.from(map.keys());
+        return keys[secureRandomInt(keys.length)];
+    }
+
+    // UK localised timestamp helper
+    function nowUk(): string {
+        return new Date().toLocaleString('en-GB', { timeZone: 'Europe/London' });
     }
 
     const CharacterMap = new Map([
@@ -39,7 +70,7 @@ function App() {
         [23, 'a prophet who lost their keys'],
         [24, 'a witch expecting a package soon'],
         [25, 'a dragon afraid of heights'],
-        [26, "a ghost learning Spanish over the shoulder of the person they're haunting"],
+        [26, "a ghost learning another language over the shoulder of the person they're haunting"],
         [27, 'a bard taking night classes to learn algebra'],
         [28, 'a necromancer trying to come up with the perfect response to a past arguement'],
         [29, 'a snail granted legs by their fairy godmother'],
@@ -94,7 +125,7 @@ function App() {
         [24, "a bat-sized coffin"],
         [25, "the key that locks a door no one can find anymore"],
         [26, "a raven feather quill that never runs out of ink"],
-        [27, "an idol of an unknown god with the face worn away "],
+        [27, "an idol of an unknown god with the face worn away"],
         [28, "a shipwreck in a bottle"],
         [29, "a chair that faces the wrong way"],
         [30, "a key that has been turned too many times"],
@@ -116,20 +147,54 @@ function App() {
         [46, "a screw from under Grim's workbench"],
     ]);
 
-    const getTask = () => {
-        if (!assigned) {
-            const characterRandom = CharacterMap.get(getRandomIndexFromMap(CharacterMap));
-            const objectRandom = ObjectMap.get(getRandomIndexFromMap(ObjectMap));
-            const locationRandom = LocationMap.get(getRandomIndexFromMap(LocationMap));
-
-            setCharacter(characterRandom);
-            setObject(objectRandom);
-            setLocation(locationRandom);
-            setAssigned(true);
-        }
-        return 
+    // called when user submits their ID to enter
+    function handleEnterSite() {
+        if (!enteredId.trim()) return;
+        const timestamp = nowUk();
+        const entryLog = { id: enteredId.trim(), event: 'entry' as const, timestamp, details: 'Site entered' };
+        setLogs(prev => [...prev, entryLog]);
+        console.log('Gate log:', entryLog);
+        setIsAuthenticated(true);
     }
 
+    const getTask = () => {
+        if (!isAuthenticated) return;
+        if (attemptsLeft > 0) {
+            const characterKey = getRandomKeyFromMap(CharacterMap);
+            const objectKey = getRandomKeyFromMap(ObjectMap);
+            const locationKey = getRandomKeyFromMap(LocationMap);
+
+            const characterRandom = CharacterMap.get(characterKey) ?? 'an unknown character';
+            const objectRandom = ObjectMap.get(objectKey) ?? 'an unknown object';
+            const locationRandom = LocationMap.get(locationKey) ?? 'an unknown location';
+
+            const newGen = {
+                character: characterRandom,
+                location: locationRandom,
+                taskObject: objectRandom,
+            };
+
+            setGenerations(prev => [...prev, newGen]);
+            setAttemptsLeft(prev => prev - 1);
+
+            // log the generation attempt with UK time and entered id
+            const genTimestamp = nowUk();
+            const genLog = {
+                id: enteredId.trim(),
+                event: 'generation' as const,
+                timestamp: genTimestamp,
+                details: `Call ${generations.length + 1} generated: ${characterRandom} / ${locationRandom} / ${objectRandom}`,
+            };
+            setLogs(prev => [...prev, genLog]);
+            console.log('Generation log:', genLog);
+        }
+    }
+
+    function handleLogout() {
+        setIsAuthenticated(false);
+        setEnteredId('');
+        // preserve logs but you can clear if you prefer
+    }
 
   return (
       <>
@@ -137,31 +202,80 @@ function App() {
               <div>
                   <img src={towerHeader} className="header-image" alt="Tower Header" />
               </div>
-              <div className="TowerTitle">
-                  Adventures in Dreamland!
-              </div>
-              <div className="TowerMain">
-                  <i>The night grows old and you are weary. Your waking hours have been spent in the service of the Tower, aiding your coven. Bleary-eyed, you climb the Tower stairs, feet dragging. All you can think about is sleep. Once you reach your chambers, you kick off your shoes and collapse into bed. But as you drift off to sleep, the Tower beckons; it is not done with you yet. You find yourself in a dream where things are not as they seem in the waking world&mdash;and you have been given a task.
-                      <br />
-                      <br />You get your bearings, and in your head, the Tower whispers your mission. </i>
-              </div>
-              <div className="card">
-                  <button  onClick={() => getTask()}>
-                      Heed the Tower's call!
-                  </button>
-                  <p>
-                      {assigned && (
-                          <>
-                          Behold! You are <b>{character}</b> who hails from <b>{location}</b>. The Tower has tasked you to find <b>{object}</b>.
-                          </>
-                      )
-                      }
 
-                      
-                  </p>
-              </div>
+              {!isAuthenticated ? (
+                  <div className="auth-container">
+                      <div className="card auth-card">
+                          <input
+                            id="idInput"
+                            type="text"
+                            value={enteredId}
+                            onChange={e => setEnteredId(e.target.value)}
+                            placeholder="Enter your ROB ID"
+                          />
+                          <div className="id-submit">
+                              <button onClick={handleEnterSite} disabled={!enteredId.trim()}>
+                                  Find the Tower
+                              </button>
+                          </div>
+
+                          {logs.length > 0 && (
+                              <div style={{ marginTop: 12, textAlign: 'left', maxWidth: 720, margin: '12px auto 0' }}>
+                                  <b>Recent logs</b>
+                                  <ul>
+                                      {logs.slice(-5).map((l, idx) => (
+                                          <li key={idx}>
+                                              [{l.timestamp}] <b>{l.id}</b> — {l.event} {l.details ? `— ${l.details}` : ''}
+                                          </li>
+                                      ))}
+                                  </ul>
+                              </div>
+                          )}
+                      </div>
+                  </div>
+              ) : (
+                  <>
+                      <div className="TowerTitle">
+                          Adventures in Dreamland!
+                      </div>
+                      <div className="TowerMain">
+                          <i>The night grows old and you are weary. Your waking hours have been spent in the service of the Tower, aiding your coven. Bleary-eyed, you climb the Tower stairs, feet dragging. All you can think about is sleep. Once you reach your chambers, you kick off your shoes and collapse into bed. But as you drift off to sleep, the Tower beckons; it is not done with you yet. You find yourself in a dream where things are not as they seem in the waking world&mdash;and you have been given a task.
+                              <br />
+                              <br />You get your bearings, and in your head, the Tower whispers your mission. </i>
+                      </div>
+
+                      <div className="card">
+                          <div style={{ display: 'flex', gap: 8, justifyContent: 'center', alignItems: 'center' }}>
+                              <button onClick={() => getTask()} disabled={attemptsLeft === 0}>
+                                  Heed the Tower's Calls!
+                              </button>
+                          </div>
+
+                          <div style={{ marginTop: 12 }}>
+                              {generations.length > 0 && (() => {
+                                  const callLabels = ['Call One', 'Call Two', 'Call Three'];
+                                  return generations.map((g, i) => (
+                                      <div key={i} style={{ marginBottom: 8 }}>
+                                          <b className="call-label">{callLabels[i] ?? `Call ${i + 1}`}:</b> <span className="call-text">Behold! You are <b>{g.character}</b> who hails from <b>{g.location}</b>. The Tower has tasked you to find <b>{g.taskObject}</b>.</span>
+                                      </div>
+                                  ));
+                              })()}
+                          </div>
+
+                          <div style={{ marginTop: 12, textAlign: 'left', maxWidth: 720, margin: '12px auto 0' }}>
+                              <b>Activity log</b>
+                              <ul>
+                                  {logs.map((l, idx) => (
+                                      <li key={idx}>
+                                          [{l.timestamp}] <b>{l.id}</b> — {l.event} {l.details ? `— ${l.details}` : ''}
+                                      </li>
+                                  ))}
+                              </ul>
+                          </div>
+                      </div>
+                  </>
+              )}
           </div>
-
     </>
   )
 }
