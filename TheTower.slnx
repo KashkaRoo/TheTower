@@ -3,5 +3,4 @@
     <Build />
     <Deploy />
   </Project>
-  <Project Path="TheTower.Server/TheTower.Server.csproj" />
 </Solution>
