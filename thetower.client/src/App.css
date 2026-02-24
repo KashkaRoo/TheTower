@@ -3,30 +3,30 @@
     margin: 0 auto;
     padding: 0;
     text-align: center;
-
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
 }
 
 .card {
-  padding: 1em;
+    padding: 1em;
 }
 
 .read-the-docs {
-  color: #888;
+    color: #888;
 }
 
 @font-face {
@@ -34,34 +34,143 @@
     src: url('./assets/fonts/Ancient Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-   
 }
+
 @font-face {
-    font-family: 'Relationship of mélodrame';
-    src: url('./assets/fonts/Relationship of mélodrame.ttf') format('truetype');
+    font-family: 'relationship of mélodrame';
+    src: url('./assets/fonts/relationship of mélodrame.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-img.header-image {
-    width: 80%;
-    height: auto;
 
+img.header-image {
+    width: 95%;
+    height: auto;
 }
 
 .TowerTitle {
     font-family: 'Ancient Medium', serif;
-    font-size: 52pt;
+    font-size: 40pt;
     color: #491e1c;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
 .TowerMain {
-    font-family: 'Relationship of mélodrame', serif;
+    font-family: 'relationship of mélodrame', serif;
+    font-size: 14.5pt;
+    color: #dfdfdf;
+}
+
+.card {
+    font-family: 'relationship of mélodrame', serif;
     font-size: 15pt;
     color: #dfdfdf;
 }
-.card {
-    font-family: 'Relationship of mélodrame', serif;
+.call-preface {
+    display: block; /* forces the call label onto a new line */
+    margin: 0 0 4px 0; /* small space under the preface */
+    opacity: 0.85;
+    color: #a1a1a1;
+    font-family: 'relationship of mélodrame', serif;
+    font-size: 15pt;
+}
+
+/* New styles for call labels and generated text */
+.call-label {
+    font-family: 'relationship of mélodrame', serif;
     font-size: 16pt;
+    font-weight: bolder;
     color: #dfdfdf;
+    text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+}
+
+.call-text {
+    font-family: 'relationship of mélodrame', serif;
+    font-size: 15pt;
+    color: #dfdfdf;
+}
+
+/* Styles for the ID entry section (input placeholder and input text) */
+#idInput,
+#idInput::placeholder {
+    font-family: 'relationship of mélodrame', serif;
+    font-size: 15pt;
+    color: #dfdfdf;
+    caret-color: #dfdfdf;
+    text-align: center; /* center the text inside the input and placeholder */
+    display: block;
+    margin: 0 auto;
+    width: 100%; /* input fills auth-card width */
+    max-width: none;
+    box-sizing: border-box;
+    padding: 6px 8px;
+}
+
+/* Add spacing between the input and the button (paragraph-like gap) */
+.id-submit {
+    margin-top: 1.5rem; /* paragraph-like gap */
+    text-align: center;
+}
+
+/* Ensure primary site buttons keep global style (from index.css) */
+.card > div > button {
+    border-radius: 8px;
+    border: 2px solid transparent;
+    border-color: #491e1c;
+    padding: 0.15em .75em;
+    font-size: 1.8em;
+    font-weight: 500;
+    font-family: 'Ancient Medium', serif;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: #491e1c;
+    display: inline-block;
+}
+
+    .card > div > button:hover {
+        border-color: #dfdfdf;
+        border-width: 2px;
+    }
+
+/* Specific override: make the ID-entry button use the Relationship font and the same readable color
+   so the input + button appearance match your requested font-family for the entry section. */
+.id-submit > button {
+    font-family: 'relationship of mélodrame', serif;
+    font-size: 15pt;
+    color: #dfdfdf;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    border-color: #491e1c;
+    padding: 0.15em .75em;
+    cursor: pointer;
+    width: 100%; /* make the button fill the auth card width so it matches the input */
+    box-sizing: border-box;
+}
+
+    .id-submit > button:hover {
+        border-color: #dfdfdf;
+    }
+
+/* Auth container sits in normal document flow below the header.
+   Center horizontally; place slightly below center by using margin-top on the container. */
+.auth-container {
+    position: static; /* keep it in document flow so it won't overlap the header image */
+    display: flex;
+    justify-content: center; /* horizontal center */
+    width: 100%;
+    margin-top: 6vh; /* push it down slightly below the header; adjust as needed */
+    pointer-events: auto;
+}
+
+/* Auth card constrained and vertically aligned with normal flow */
+.auth-card {
+    width: 60%;
+    max-width: 520px;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    margin: 0; /* centered by the flex parent */
+    position: static;
+    transform: none;
 }
