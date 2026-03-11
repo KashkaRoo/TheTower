@@ -1,13 +1,25 @@
 import { useMemo, useState } from "react";
 import './index.css'
 import './App.css'
-
 import TowerHeader from "./components/TowerHeader";
 import AuthCard from "./components/AuthCard";
 import GenerationView from "./components/GenerationView";
-
 import { getUserPromptCount, getUserPrompts, makeOneGeneration, INITIAL_ATTEMPTS, callLabels, callPrefaces } from "./utils/generator";
 import type { Generation } from "./utils/generator";
+
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdtWIDkD6L2ful4CKajaW01YiPdyZyZ04P2cA-DQmYVHEJoDe0gcoPZUDfMRQ8-qCHzw/exec";
+
+function logEvent(robId: string, event: string, character?: string, location?: string, object?: string) {
+    const params = new URLSearchParams({
+        timestamp: new Date().toISOString(),
+        robId,
+        event,
+        character: character ?? "",
+        location: location ?? "",
+        object: object ?? "",
+    });
+    fetch(`${APPS_SCRIPT_URL}?${params.toString()}`).catch(console.error);
+}
 
 function App() {
     const [enteredId, setEnteredId] = useState<string>("");
@@ -18,7 +30,6 @@ function App() {
     const [isGenerating, setIsGenerating] = useState<boolean>(false);
     const [generationError, setGenerationError] = useState<string>("");
 
-    // Default: show only the latest. At the end, user can reveal all.
     const [showAll, setShowAll] = useState<boolean>(false);
 
     function handleEnterSite() {
@@ -26,6 +37,7 @@ function App() {
         if (!userId) return;
         setGenerationError("");
         setIsAuthenticated(true);
+        logEvent(userId, "Enter Site");
     }
 
     async function getTask() {
@@ -51,6 +63,8 @@ function App() {
             }
 
             const newGen = await makeOneGeneration(userId);
+            const callLabel = callLabels[promptCount] ?? `Call ${promptCount + 1}`;
+            logEvent(userId, callLabel, newGen.character, newGen.location, newGen.taskObject);
             setGenerations((prev) => [...prev, newGen]);
             setAttemptsLeft(INITIAL_ATTEMPTS - (promptCount + 1));
             setShowAll(false);
@@ -63,7 +77,7 @@ function App() {
     }
 
     const callButtonText = useMemo(() => {
-        const used = INITIAL_ATTEMPTS - attemptsLeft; // 0..3
+        const used = INITIAL_ATTEMPTS - attemptsLeft;
         if (used <= 0) return "Heed the Tower's Call!";
         if (used === 1) return "Heed the Tower's Call again";
         if (used === 2) return "Heed the Tower's Call a third time";
@@ -97,7 +111,7 @@ function App() {
                             <p></p>
                             At last, you reach your chambers. You kick off your shoes and collapse into bed. But just as you begin to drift, the Tower beckons—it is not finished with you yet.
                             <p></p>
-                            You find yourself in a dream where things are not as they seem in the waking world, and you have been given a task. You steady yourself, get your bearings, and in your mind, the Tower whispers your mission. 
+                            You find yourself in a dream where things are not as they seem in the waking world, and you have been given a task. You steady yourself, get your bearings, and in your mind, the Tower whispers your mission.
                             <p></p>
                             You get your bearings, and in your head, the Tower whispers your mission.
                         </i>
