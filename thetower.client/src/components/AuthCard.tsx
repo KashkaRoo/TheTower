@@ -1,4 +1,4 @@
-import React from "react";
+import type { ChangeEvent } from "react";
 
 interface Props {
     enteredId: string;

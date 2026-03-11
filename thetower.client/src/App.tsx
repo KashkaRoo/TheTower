@@ -5,7 +5,7 @@ import TowerHeader from "./components/TowerHeader";
 import AuthCard from "./components/AuthCard";
 import GenerationView from "./components/GenerationView";
 
-import { makeOneGeneration, INITIAL_ATTEMPTS, callLabels, callPrefaces } from "./utils/generator";
+import { getUserPromptCount, getUserPrompts, makeOneGeneration, INITIAL_ATTEMPTS, callLabels, callPrefaces } from "./utils/generator";
 import type { Generation } from "./utils/generator";
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
 
     const [attemptsLeft, setAttemptsLeft] = useState<number>(INITIAL_ATTEMPTS);
     const [generations, setGenerations] = useState<Generation[]>([]);
+    const [isGenerating, setIsGenerating] = useState<boolean>(false);
+    const [generationError, setGenerationError] = useState<string>("");
 
     // Default: show only the latest. At the end, user can reveal all.
     const [showAll, setShowAll] = useState<boolean>(false);
@@ -21,17 +23,42 @@ function App() {
     function handleEnterSite() {
         const userId = enteredId.trim();
         if (!userId) return;
+        setGenerationError("");
         setIsAuthenticated(true);
     }
 
-    function getTask() {
+    async function getTask() {
         if (!isAuthenticated) return;
-        if (attemptsLeft <= 0) return;
+        if (attemptsLeft <= 0 || isGenerating) return;
 
-        const newGen = makeOneGeneration();
-        setGenerations((prev) => [...prev, newGen]);
-        setAttemptsLeft((prev) => prev - 1);
-        setShowAll(false);
+        const userId = enteredId.trim();
+        if (!userId) return;
+
+        setGenerationError("");
+        setIsGenerating(true);
+
+        try {
+            const promptCount = await getUserPromptCount(userId);
+
+            if (promptCount >= INITIAL_ATTEMPTS) {
+                const existingPrompts = await getUserPrompts(userId);
+                setGenerations(existingPrompts);
+                setAttemptsLeft(0);
+                setShowAll(true);
+                setGenerationError("You already have 3 prompts for today. Showing all of today's prompts.");
+                return;
+            }
+
+            const newGen = await makeOneGeneration(userId);
+            setGenerations((prev) => [...prev, newGen]);
+            setAttemptsLeft(INITIAL_ATTEMPTS - (promptCount + 1));
+            setShowAll(false);
+        } catch (error) {
+            console.error("Failed to generate prompt", error);
+            setGenerationError(error instanceof Error ? error.message : "Failed to generate prompt.");
+        } finally {
+            setIsGenerating(false);
+        }
     }
 
     const callButtonText = useMemo(() => {
@@ -78,8 +105,8 @@ function App() {
 
                     <div className="card">
                         <div style={{ display: "flex", gap: 8, justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
-                            <button onClick={getTask} disabled={attemptsLeft === 0}>
-                                {callButtonText}
+                            <button onClick={() => void getTask()} disabled={attemptsLeft === 0 || isGenerating}>
+                                {isGenerating ? "The Tower speaks..." : callButtonText}
                             </button>
 
                             {canRevealAllAtEnd && (
@@ -88,6 +115,12 @@ function App() {
                                 </button>
                             )}
                         </div>
+
+                        {generationError ? (
+                            <div style={{ marginTop: 12, textAlign: "center" }}>
+                                <i>{generationError}</i>
+                            </div>
+                        ) : null}
 
                         <div style={{ marginTop: 12 }}>
                             <GenerationView

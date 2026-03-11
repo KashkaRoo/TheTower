@@ -31,14 +31,14 @@
 
 @font-face {
     font-family: 'Ancient Medium';
-    src: url('./assets/fonts/Ancient Medium.ttf') format('truetype');
+    src: url('./assets/Fonts/Ancient Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'relationship of mélodrame';
-    src: url('./assets/fonts/relationship of mélodrame.ttf') format('truetype');
+    font-family: 'Relationship of mÃ©lodrame';
+    src: url('./assets/Fonts/Relationship of mÃ©lodrame.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -56,13 +56,13 @@ img.header-image {
 }
 
 .TowerMain {
-    font-family: 'relationship of mélodrame', serif;
+    font-family: 'Relationship of mÃ©lodrame', serif;
     font-size: 14.5pt;
     color: #dfdfdf;
 }
 
 .card {
-    font-family: 'relationship of mélodrame', serif;
+    font-family: 'Relationship of mÃ©lodrame', serif;
     font-size: 15pt;
     color: #dfdfdf;
 }
@@ -71,13 +71,13 @@ img.header-image {
     margin: 0 0 4px 0; /* small space under the preface */
     opacity: 0.85;
     color: #a1a1a1;
-    font-family: 'relationship of mélodrame', serif;
+    font-family: 'Relationship of mÃ©lodrame', serif;
     font-size: 15pt;
 }
 
 /* New styles for call labels and generated text */
 .call-label {
-    font-family: 'relationship of mélodrame', serif;
+    font-family: 'Relationship of mÃ©lodrame', serif;
     font-size: 16pt;
     font-weight: bolder;
     color: #dfdfdf;
@@ -85,7 +85,7 @@ img.header-image {
 }
 
 .call-text {
-    font-family: 'relationship of mélodrame', serif;
+    font-family: 'Relationship of mÃ©lodrame', serif;
     font-size: 15pt;
     color: #dfdfdf;
 }
@@ -93,7 +93,7 @@ img.header-image {
 /* Styles for the ID entry section (input placeholder and input text) */
 #idInput,
 #idInput::placeholder {
-    font-family: 'relationship of mélodrame', serif;
+    font-family: 'Relationship of mÃ©lodrame', serif;
     font-size: 15pt;
     color: #dfdfdf;
     caret-color: #dfdfdf;
@@ -136,7 +136,7 @@ img.header-image {
 /* Specific override: make the ID-entry button use the Relationship font and the same readable color
    so the input + button appearance match your requested font-family for the entry section. */
 .id-submit > button {
-    font-family: 'relationship of mélodrame', serif;
+    font-family: 'Relationship of mÃ©lodrame', serif;
     font-size: 15pt;
     color: #dfdfdf;
     background-color: #1a1a1a;
