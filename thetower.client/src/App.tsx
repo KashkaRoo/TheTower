@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import "./App.css";
+import './index.css'
+import './App.css'
 
 import TowerHeader from "./components/TowerHeader";
 import AuthCard from "./components/AuthCard";
