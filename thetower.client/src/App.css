@@ -52,14 +52,14 @@ img.header-image {
 
 .TowerTitle {
     font-family: 'Ancient Medium', serif;
-    font-size: 40pt;
+    font-size: 45pt;
     color: #491e1c;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
 .TowerMain {
     font-family: 'Playfair Display', serif;
-    font-size: 14.5pt;
+    font-size: 15pt;
     color: #dfdfdf;
 }
 
@@ -80,7 +80,7 @@ img.header-image {
 
 .call-label {
     font-family: 'Playfair Display', serif;
-    font-size: 16pt;
+    font-size: 17pt;
     font-weight: bolder;
     color: #dfdfdf;
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
@@ -88,7 +88,7 @@ img.header-image {
 
 .call-text {
     font-family: 'Playfair Display', serif;
-    font-size: 15pt;
+    font-size: 16pt;
     color: #dfdfdf;
 }
 

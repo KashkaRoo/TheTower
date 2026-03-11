@@ -111,9 +111,9 @@ function App() {
                             <p></p>
                             At last, you reach your chambers. You kick off your shoes and collapse into bed. But just as you begin to drift off to sleep, the Tower beckons—it is not finished with you yet.
                             <p></p>
-                            You find yourself in a dream where things are not as they seem in the waking world, and you have been given a task. You steady yourself, get your bearings, and in your mind, the Tower whispers your mission.
+                            You find yourself in a dream where things are not as they seem in the waking world, and you have been given a task. 
                             <p></p>
-                            You get your bearings, and in your head, the Tower whispers your mission.
+                            You steady yourself, get your bearings, and in your mind, the Tower whispers your mission.
                         </i>
                     </div>
 
