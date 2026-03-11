@@ -1,4 +1,4 @@
-import towerHeader from "/TowerHeaderSmallerer.png";
+import towerHeader from "/TowerHeaderV2.png";
 
 export default function TowerHeader() {
     return (
