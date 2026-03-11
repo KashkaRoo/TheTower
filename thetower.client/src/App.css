@@ -46,7 +46,7 @@
 }
 
 img.header-image {
-    width: 35%;
+    width: 30%;
     height: auto;
 }
 
@@ -155,7 +155,7 @@ img.header-image {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 2vh;
+    margin-top: 1vh;
     pointer-events: auto;
 }
 
