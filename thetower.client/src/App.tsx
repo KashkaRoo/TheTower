@@ -7,7 +7,7 @@ import GenerationView from "./components/GenerationView";
 import { getUserPromptCount, getUserPrompts, makeOneGeneration, INITIAL_ATTEMPTS, callLabels, callPrefaces } from "./utils/generator";
 import type { Generation } from "./utils/generator";
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdtWIDkD6L2ful4CKajaW01YiPdyZyZ04P2cA-DQmYVHEJoDe0gcoPZUDfMRQ8-qCHzw/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyoLN_Lumr71jGChzbn4VJxfoYkdMqIMw_uvIBnK3AGNKvLx-JAaTy8-XAsq1ZOc5SaVw/exec";
 
 function logEvent(robId: string, event: string, character?: string, location?: string, object?: string) {
     const params = new URLSearchParams({
