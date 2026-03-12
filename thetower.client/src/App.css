@@ -46,14 +46,14 @@
 }
 
 img.header-image {
-    width: 30%;
+    width: 35%;
     height: auto;
 }
 
 .TowerTitle {
     font-family: 'Ancient Medium', serif;
     font-size: 45pt;
-    color: #5b0600;
+    color: #491e1c;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
@@ -133,7 +133,7 @@ img.header-image {
 .card > div > button {
     border-radius: 8px;
     border: 2px solid transparent;
-    border-color: #5b0600;
+    border-color: #491e1c;
     padding: 0.15em .75em;
     font-size: 1.8em;
     font-weight: 500;
@@ -141,7 +141,7 @@ img.header-image {
     background-color: #1a1a1a;
     cursor: pointer;
     transition: border-color 0.25s;
-    color: #5b0600;
+    color: #491e1c;
     display: inline-block;
 }
 
