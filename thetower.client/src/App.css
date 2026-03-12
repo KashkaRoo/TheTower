@@ -59,6 +59,7 @@ img.header-image {
     width: 30%;
     height: auto;
     padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .TowerTitle {
@@ -66,7 +67,7 @@ img.header-image {
     font-size: 45pt;
     color: #491e1c;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
-    margin-top: -20px;
+    margin-top: -30px;
 }
 
 
@@ -132,7 +133,7 @@ img.header-image {
     background-color: #1a1a1a;
     border-radius: 8px;
     border: 2px solid transparent;
-    border-color: #5b0600;
+    border-color: #491e1c;
     padding: 0.15em .75em;
     cursor: pointer;
     width: 100%;
@@ -215,7 +216,7 @@ img.header-image {
     margin-right: auto;
     margin-top: 0.5rem;
     padding: 1rem;
-    border: 1px solid #5b0600;
+    border: 1px solid #491e1c;
     border-radius: 12px;
     background: rgba(26, 26, 26, 0.92);
     box-sizing: border-box;
@@ -239,7 +240,7 @@ img.header-image {
     display: grid;
     gap: 0.5rem;
     padding: 1.25rem;
-    border: 1px solid #5b0600;
+    border: 1px solid #491e1c;
     border-radius: 12px;
     background: rgba(26, 26, 26, 0.92);
     box-sizing: border-box;
@@ -256,7 +257,7 @@ img.header-image {
     width: 100%;
     padding: 0.45rem 0.6rem;
     border-radius: 8px;
-    border: 1px solid #5b0600;
+    border: 1px solid #491e1c;
     background: #1a1a1a;
     color: #dfdfdf;
     font-family: 'Playfair Display', serif;
@@ -310,7 +311,7 @@ img.header-image {
     min-width: 2rem;
     font-size: 1rem;
     border-radius: 8px;
-    border: 1px solid #5b0600;
+    border: 1px solid #491e1c;
     background: #1a1a1a;
     color: #dfdfdf;
     cursor: pointer;
@@ -332,7 +333,7 @@ img.header-image {
     width: min(560px, calc(100% - 1rem));
     margin: 0 auto 0.75rem;
     padding: 0.5rem;
-    border: 1px solid #5b0600;
+    border: 1px solid #491e1c;
     border-radius: 14px;
     background: rgba(26, 26, 26, 0.95);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
@@ -360,7 +361,7 @@ img.header-image {
 }
 
 .bottom-nav-link.active {
-    border-color: #5b0600;
+    border-color: #491e1c;
     background: #491e1c;
     color: #ffffff;
 }
