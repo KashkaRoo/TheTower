@@ -10,6 +10,7 @@ const SQL_LIKE_PATTERN = /('|"|;|--|\/\*|\*\/|\b(OR|AND|UNION|SELECT|INSERT|UPDA
 
 type AddOption = "Character" | "Location" | "Object";
 type EntityListItem = { id?: number; name?: string | null };
+type EntityListRow = { id: number; name: string };
 
 const addOptionToEndpoint: Record<AddOption, string> = {
     Character: "characters",
@@ -27,9 +28,10 @@ function AdminPage() {
     const [addStatus, setAddStatus] = useState<string>("");
     const [isSubmittingAdd, setIsSubmittingAdd] = useState<boolean>(false);
     const [listType, setListType] = useState<AddOption>("Character");
-    const [listItems, setListItems] = useState<string[]>([]);
+    const [listItems, setListItems] = useState<EntityListRow[]>([]);
     const [listStatus, setListStatus] = useState<string>("");
     const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
+    const [deletingId, setDeletingId] = useState<number | null>(null);
 
     function handleLogin(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -136,12 +138,15 @@ function AdminPage() {
                 return;
             }
 
-            const names = payload
-                .map((item) => item.name?.trim() ?? "")
-                .filter((name) => name.length > 0);
+            const rows = payload
+                .filter((item): item is { id: number; name: string } =>
+                    typeof item.id === "number" && Number.isFinite(item.id) && typeof item.name === "string",
+                )
+                .map((item) => ({ id: item.id, name: item.name.trim() }))
+                .filter((item) => item.name.length > 0);
 
-            setListItems(names);
-            if (names.length === 0) {
+            setListItems(rows);
+            if (rows.length === 0) {
                 setListStatus(`No ${selectedType.toLowerCase()} values found.`);
             }
         } catch (error) {
@@ -150,6 +155,41 @@ function AdminPage() {
             setListStatus(message);
         } finally {
             setIsLoadingList(false);
+        }
+    }
+
+    async function handleDeleteItem(id: number) {
+        setListStatus("");
+        setDeletingId(id);
+
+        try {
+            const endpoint = addOptionToEndpoint[listType];
+            const response = await fetch(`${GENERATION_API_BASE}/${endpoint}/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                let detail = "";
+                try {
+                    const payload = await response.json() as { message?: string };
+                    detail = payload.message?.trim() ?? "";
+                } catch {
+                    detail = response.statusText;
+                }
+
+                throw new Error(detail || `Delete request failed with status ${response.status}.`);
+            }
+
+            await loadEntityList(listType);
+            setListStatus(`${listType} deleted successfully.`);
+        } catch (error) {
+            const message = error instanceof Error ? error.message : "Failed to delete value.";
+            setListStatus(message);
+        } finally {
+            setDeletingId(null);
         }
     }
 
@@ -256,11 +296,23 @@ function AdminPage() {
                     {listStatus ? <p className="admin-add-status">{listStatus}</p> : null}
 
                     {!isLoadingList && listItems.length > 0 ? (
-                        <ul className="admin-bullet-list">
-                            {listItems.map((name, index) => (
-                                <li key={`${name}-${index}`}>{name}</li>
+                        <div className="admin-entity-list">
+                            {listItems.map((item) => (
+                                <div className="admin-entity-row" key={item.id}>
+                                    <span>{item.name}</span>
+                                    <button
+                                        type="button"
+                                        className="admin-trash-button"
+                                        onClick={() => void handleDeleteItem(item.id)}
+                                        disabled={deletingId === item.id}
+                                        aria-label={`Delete ${listType} ${item.name}`}
+                                        title={`Delete ${item.name}`}
+                                    >
+                                        {deletingId === item.id ? "..." : "🗑"}
+                                    </button>
+                                </div>
                             ))}
-                        </ul>
+                        </div>
                     ) : null}
                 </div>
             </section>
