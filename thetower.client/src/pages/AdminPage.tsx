@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
 const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin";
+const ADMIN_PASSWORD = "vincent4ever";
 const GENERATION_API_BASE = "https://towerapi-bxdrc5dthbdjhmb3.westus2-01.azurewebsites.net/api/Generation";
 const MAX_CREDENTIAL_LENGTH = 64;
 const SAFE_CREDENTIAL_PATTERN = /^[A-Za-z0-9@._-]{1,64}$/;
