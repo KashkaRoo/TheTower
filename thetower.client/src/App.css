@@ -55,11 +55,13 @@ img.header-image {
     font-size: 45pt;
     color: #491e1c;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    margin-top: -30px;
 }
+
 
 .TowerMain {
     font-family: 'Playfair Display', serif;
-    font-size: 15pt;
+    font-size: 14.5pt;
     color: #dfdfdf;
 }
 
@@ -80,7 +82,7 @@ img.header-image {
 
 .call-label {
     font-family: 'Playfair Display', serif;
-    font-size: 17pt;
+    font-size: 16pt;
     font-weight: bolder;
     color: #dfdfdf;
     text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
