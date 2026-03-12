@@ -1,8 +1,18 @@
 .app-body {
     max-width: 1024px;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 0 1rem 0;
     text-align: center;
+}
+
+.app-shell {
+    min-height: 100vh;
+    padding-bottom: 84px;
+    box-sizing: border-box;
+}
+
+.app-content {
+    width: 100%;
 }
 
 @keyframes logo-spin {
@@ -169,4 +179,91 @@ img.header-image {
     margin: 0;
     position: static;
     transform: none;
+}
+
+.admin-page {
+    min-height: calc(100vh - 120px);
+    display: grid;
+    place-content: center;
+    gap: 0.75rem;
+    text-align: center;
+    padding: 2rem 1.25rem;
+    box-sizing: border-box;
+}
+
+.admin-title {
+    margin: 0;
+    font-family: 'Ancient Medium', serif;
+    font-size: 2.5rem;
+    color: #491e1c;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.admin-copy {
+    margin: 0;
+    max-width: 650px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.125rem;
+    color: #dfdfdf;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    width: min(560px, calc(100% - 1rem));
+    margin: 0 auto 0.75rem;
+    padding: 0.5rem;
+    border: 1px solid #5b0600;
+    border-radius: 14px;
+    background: rgba(26, 26, 26, 0.95);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    box-sizing: border-box;
+}
+
+.bottom-nav-link {
+    display: block;
+    text-align: center;
+    padding: 0.45rem 0.75rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: #dfdfdf;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.bottom-nav-link:hover {
+    border-color: #dfdfdf;
+    color: #ffffff;
+}
+
+.bottom-nav-link.active {
+    border-color: #5b0600;
+    background: #491e1c;
+    color: #ffffff;
+}
+
+@media (max-width: 640px) {
+    .TowerTitle {
+        font-size: 2.2rem;
+        margin-top: -8px;
+    }
+
+    .TowerMain {
+        font-size: 1rem;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
+
+    .auth-card {
+        width: calc(100% - 2rem);
+    }
 }
