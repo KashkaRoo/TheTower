@@ -185,6 +185,7 @@ img.header-image {
     min-height: calc(100vh - 120px);
     display: grid;
     place-content: center;
+    justify-items: center;
     gap: 0.75rem;
     text-align: center;
     padding: 2rem 1.25rem;
@@ -205,6 +206,94 @@ img.header-image {
     font-family: 'Playfair Display', serif;
     font-size: 1.125rem;
     color: #dfdfdf;
+}
+
+.admin-section {
+    width: min(100%, 560px);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    border: 1px solid #5b0600;
+    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.92);
+    box-sizing: border-box;
+}
+
+.admin-section-title {
+    margin: 0 0 0.75rem 0;
+    font-family: 'Ancient Medium', serif;
+    font-size: 1.8rem;
+    color: #491e1c;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.admin-add-form {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.admin-login-card {
+    width: min(100%, 420px);
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    border: 1px solid #5b0600;
+    border-radius: 12px;
+    background: rgba(26, 26, 26, 0.92);
+    box-sizing: border-box;
+}
+
+.admin-input-label {
+    text-align: left;
+    color: #dfdfdf;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+    border: 1px solid #5b0600;
+    background: #1a1a1a;
+    color: #dfdfdf;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.admin-login-button {
+    margin-top: 0.35rem;
+}
+
+.admin-error {
+    margin: 0.25rem 0;
+    color: #ffb3b3;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+}
+
+.admin-add-status {
+    margin: 0.25rem 0;
+    color: #dfdfdf;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+}
+
+.admin-bullet-list {
+    margin: 0.25rem 0 0 0;
+    padding-left: 1.5rem;
+    text-align: left;
+    color: #dfdfdf;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    max-height: 240px;
+    overflow: auto;
+}
+
+.admin-bullet-list li {
+    margin: 0.15rem 0;
 }
 
 .bottom-nav {
